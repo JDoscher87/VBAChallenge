@@ -14,13 +14,13 @@ Sub Stock_Analysis()
     Dim averageChange As Double
     Dim ws As Worksheet
     For Each ws In Worksheets
-        ' Set values for each worksheet
+        ' Starting values for each worksheet
         j = 0
         total = 0
         change = 0
         start = 2
         dailyChange = 0
-        ' Set title row
+        ' create title row
         ws.Range("I1").Value = "Ticker"
         ws.Range("J1").Value = "Yearly Change"
         ws.Range("K1").Value = "Percent Change"
@@ -33,7 +33,7 @@ Sub Stock_Analysis()
         ' get the row number of the last row with data
         rowCount = Cells(Rows.Count, "A").End(xlUp).Row
         For i = 2 To rowCount
-            ' If ticker changes then print results
+            ' Print result upon ticker changes
             If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
                 ' Stores results in variables
                 total = total + ws.Cells(i, 7).Value
@@ -66,7 +66,7 @@ Sub Stock_Analysis()
                     ws.Range("K" & 2 + j).Value = percentChange
                     ws.Range("K" & 2 + j).NumberFormat = "0.00%"
                     ws.Range("L" & 2 + j).Value = total
-                    ' colors positives green and negatives red
+                    ' condictional formating colors positives green and negatives red
                     Select Case change
                         Case Is > 0
                             ws.Range("J" & 2 + j).Interior.ColorIndex = 4
